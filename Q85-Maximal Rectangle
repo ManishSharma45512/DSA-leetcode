@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        if (matrix.empty() || matrix[0].empty()) return 0;
+        int row = matrix.size(), col = matrix[0].size(), area = 0;
+
+        for (int i = 0; i < row; i++)
+            for (int j = 0; j < col; j++)
+                if (matrix[i][j] == '1')
+                    // w must start as the distance from j to the end of the row (c - j)
+                    for (int temprow = i, w = col - j; temprow < row && matrix[temprow][j] == '1'; temprow++) {
+                        int cur_w = 0;
+                        while (cur_w < w && matrix[temprow][j + cur_w] == '1') cur_w++;
+                        w = cur_w; 
+                        area = max(area, (temprow - i + 1) * w);
+                    }
+        return area;
+    }
+};
