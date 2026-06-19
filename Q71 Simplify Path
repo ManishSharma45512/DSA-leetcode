@@ -1,0 +1,78 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        stack<char> s;
+        int n = path.length();
+
+        for (int i = 0; i < n; i++) {
+            
+            if (path[i] == '/' && !s.empty() && s.top() == '/') {
+                continue;
+            }
+
+            s.push(path[i]);
+
+            
+            if (path[i] == '/' || i == n - 1) {
+                
+                string component = "";
+                
+                
+                if (s.top() == '/' && s.size() > 1) {
+                    s.pop();
+                }
+
+                // Read backwards until we hit the preceding slash
+                while (!s.empty() && s.top() != '/') {
+                    component += s.top();
+                    s.pop();
+                }
+                reverse(component.begin(), component.end());
+
+                if (component == "." || component == "") {
+                    // It's a current directory or empty, do nothing (we already popped it)
+                } 
+                else if (component == "..") {
+                    // It's a parent directory: pop the preceding directory name completely
+                    if (!s.empty() && s.top() == '/') {
+                        s.pop(); // Pop the separating slash
+                        while (!s.empty() && s.top() != '/') {
+                            s.pop(); // Pop the entire directory name
+                        }
+                    }
+                } 
+                else {
+                    // It's a valid directory name (like "Pictures" or "..."), push it back into the stack
+                    for (char ch : component) {
+                        s.push(ch);
+                    }
+                }
+
+                // Put the separating slash back if it's needed
+                if (path[i] == '/' && (s.empty() || s.top() != '/')) {
+                    s.push('/');
+                }
+            }
+        }
+
+       
+        if (s.size() > 1 && s.top() == '/') {
+            s.pop();
+        }
+
+        
+        string res = "";
+        while (!s.empty()) {
+            res += s.top();
+            s.pop();
+        }
+        reverse(res.begin(), res.end());
+
+        // Ensure it always starts with a slash
+        if (res.empty() || res[0] != '/') {
+            res = "/" + res;
+        }
+
+        return res;
+    }
+};
