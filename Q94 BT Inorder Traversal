@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        stack<TreeNode*> s;
+        TreeNode* curr = root;
+
+        
+        while (curr != nullptr || !s.empty()) {
+            
+            // 1. Go as deep left as possible
+            while (curr != nullptr) {
+                s.push(curr);
+                curr = curr->left;
+            }
+
+            // 2. Current must be NULL at this point, so pop from stack
+            curr = s.top();
+            s.pop();
+
+            // 3. Add the node's value to our result (Inorder Visit)
+            res.push_back(curr->val);
+
+            // 4. Now, visit the right subtree
+            curr = curr->right;
+        }
+
+        return res;
+    }
+};
