@@ -1,0 +1,57 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if (s.size() < t.size() || s.empty() || t.empty()) return "";
+
+        
+        unordered_map<char, int> target_freq;
+        for (char c : t) {
+            target_freq[c]++;
+        }
+
+        
+        unordered_map<char, int> window_freq;
+
+        int left = 0;
+        int required_count = target_freq.size(); 
+        int formed_count = 0;                    
+
+        // Track minimum window variables: {length, start_index}
+        int min_len = INT_MAX;
+        int min_start = 0;
+
+        // Expand the window using the right pointer
+        for (int right = 0; right < s.size(); right++) {
+            char current_char = s[right];
+            window_freq[current_char]++;
+
+            // If the current character is a part of t and its frequency matches the requirement
+            if (target_freq.count(current_char) && window_freq[current_char] == target_freq[current_char]) {
+                formed_count++;
+            }
+
+            // Try and contract the window from the left when it's valid
+            while (left <= right && formed_count == required_count) {
+                char left_char = s[left];
+
+                // Update our minimum window track if this one is smaller
+                int current_window_len = right - left + 1;
+                if (current_window_len < min_len) {
+                    min_len = current_window_len;
+                    min_start = left;
+                }
+
+                // The character at the 'left' pointer is leaving the window
+                window_freq[left_char]--;
+                if (target_freq.count(left_char) && window_freq[left_char] < target_freq[left_char]) {
+                    formed_count--; // Window is no longer completely valid
+                }
+
+                left++; // Shrink window
+            }
+        }
+
+        // If min_len wasn't updated->no valid window was found
+        return min_len == INT_MAX ? "" : s.substr(min_start, min_len);
+    }
+};
