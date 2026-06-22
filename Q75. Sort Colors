@@ -1,0 +1,39 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        if(nums.size() == 0) return;
+
+        
+        unordered_map<int, int> freq;
+        freq.insert({0, 0});
+        freq.insert({1, 0});
+        freq.insert({2, 0});
+
+        
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == 0) freq[0]++;
+            else if(nums[i] == 1) freq[1]++;
+            else if(nums[i] == 2) freq[2]++;
+        }
+
+        
+        int i = 0;
+        while(freq[0] > 0 && i < nums.size()){
+            nums[i] = 0;
+            freq[0]--;
+            i++;
+        }
+
+        while(freq[1] > 0 && i < nums.size()){
+            nums[i] = 1;
+            freq[1]--;
+            i++;
+        }
+
+        while(freq[2] > 0 && i < nums.size()){
+            nums[i] = 2;
+            freq[2]--;
+            i++;
+        }
+    }
+};
