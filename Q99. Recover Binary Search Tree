@@ -1,0 +1,42 @@
+class Solution {
+private:
+    TreeNode* first = nullptr;
+    TreeNode* second = nullptr;
+    TreeNode* prev = new TreeNode(INT_MIN); 
+
+public:
+    void inorder(TreeNode* root) {
+        if (root == nullptr) return;
+
+        
+        inorder(root->left);
+
+        
+        if (prev != nullptr && prev->val > root->val) {//violation/problematic pair
+            
+            if (first == nullptr) {
+                first = prev;
+            }
+            
+            second = root;
+        }
+        
+       
+        prev = root;
+
+        
+        inorder(root->right);
+    }
+
+    void recoverTree(TreeNode* root) {
+        
+        inorder(root);
+
+        
+        if (first != nullptr && second != nullptr) {
+            int temp = first->val;
+            first->val = second->val;
+            second->val = temp;
+        }
+    }
+};
