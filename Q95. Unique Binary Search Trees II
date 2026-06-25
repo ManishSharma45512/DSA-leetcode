@@ -1,0 +1,37 @@
+class Solution {
+public:
+    //helper function to build unique trees
+    vector<TreeNode*> build(int start, int end) {
+        vector<TreeNode*> ans;
+
+        // Base Case: 
+        if (start > end) {
+            ans.push_back(nullptr);
+            return ans;
+        }
+
+        //checking Tree For every root
+        for (int i = start; i <= end; i++) {
+            
+            //Storing all configuration of all posssible right and left tree
+            vector<TreeNode*> leftTrees = build(start, i - 1);
+            vector<TreeNode*> rightTrees = build(i + 1, end);
+
+            
+            for (TreeNode* left : leftTrees) {
+                for (TreeNode* right : rightTrees) {
+                    TreeNode* root = new TreeNode(i);
+                    root->left = left;
+                    root->right = right;
+                    ans.push_back(root); //storing valid unique tree in answer
+                }
+            }
+        }
+        return ans;
+    }
+
+    vector<TreeNode*> generateTrees(int n) {
+        if (n == 0) return {};
+        return build(1, n);
+    }
+};
