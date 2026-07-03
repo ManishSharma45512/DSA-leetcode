@@ -1,0 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+                                                                        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (head == nullptr) return head;
+
+        unordered_map<int, int> freq;
+        ListNode* temp = head;
+
+        
+        while (temp != nullptr) {
+            freq[temp->val]++;
+            temp = temp->next;
+        }
+
+        
+        ListNode* dummy = new ListNode(0);
+        ListNode* current = dummy;
+        
+        temp = head; 
+        while (temp != nullptr) {
+            if (freq[temp->val] == 1) {
+                current->next = new ListNode(temp->val);
+                current = current->next;
+            }
+            temp = temp->next;
+        }
+
+        ListNode* actualHead = dummy->next;
+        delete dummy; // Clean up the dummy node memory
+        return actualHead;
+    }
+};
