@@ -1,0 +1,102 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+                                                                                  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                 
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(head == nullptr || left == right) return head; // Base Case
+
+        
+        ListNode* leftInsertPoint = nullptr;
+        ListNode* rightInsertPoint = nullptr;
+
+       
+        ListNode* mainDummy = new ListNode(0, head);
+        ListNode* temp = mainDummy; 
+        
+        ListNode* partition = new ListNode(0); 
+        ListNode* curr = partition;
+        
+        bool leftFound = false;
+        bool rightFound = false;
+        int currentIndex = 0; 
+
+        
+        while(temp != nullptr && !(leftFound && rightFound)) { // O(n)
+            
+            // Look ahead to find the node right before 'left'
+            if(currentIndex == left - 1 && !leftFound) {
+                leftInsertPoint = temp;
+                leftFound = true;
+            }
+
+            // Collect elements that fall inside the [left, right] position range
+            if(currentIndex >= left && currentIndex <= right) {
+                curr->next = new ListNode(temp->val);
+                curr = curr->next;
+            }
+
+            // Capture the node right after 'right'
+            if(currentIndex == right) {
+                rightInsertPoint = temp->next;
+                rightFound = true;
+                break;
+            }
+
+            temp = temp->next;
+            currentIndex++;
+        } // our subLL for reversal is ready
+
+        ListNode* reverse = partition->next;
+        delete partition; // Clean up the partition wrapper
+
+        if(reverse == nullptr) return head; // Base case if partition is not found;
+        
+        vector<int> arr;
+        
+        temp = reverse; 
+
+        while(temp != nullptr) { // O(n)
+            arr.push_back(temp->val);
+            ListNode* toDelete = temp;
+            temp = temp->next;
+            delete toDelete;
+        }
+
+        ListNode* dummy = new ListNode(0);
+        curr = dummy; // Reuse existing 'curr' variable instead of redefining it
+
+        for(int i = arr.size() - 1; i >= 0; i--) { // O(n)
+            curr->next = new ListNode(arr[i]); // Fixed: changed 'Node' to 'ListNode'
+            curr = curr->next;
+        }
+        
+        // curr will be the last inserted element
+        ListNode* insertPoint = dummy->next;
+        delete dummy; // Clean up dummy container
+        
+
+        leftInsertPoint->next = insertPoint;
+        curr->next = rightInsertPoint;
+
+        ListNode* actualHead = mainDummy->next;
+        delete mainDummy;
+
+        return actualHead;
+    }
+};
