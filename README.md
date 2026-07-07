@@ -7,7 +7,7 @@
 **⌨️ Written in blood, sweat, and pure C++ ⌨️**
 
 ![C++](https://img.shields.io/badge/Language-C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
-![Problems Solved](https://img.shields.io/badge/Problems%20Solved-<!--PROBLEM_COUNT-->0<!--END_PROBLEM_COUNT-->-brightgreen?style=for-the-badge&logo=leetcode)
+![Problems Solved](https://img.shields.io/badge/Problems%20Solved-<!--PROBLEM_COUNT-->100<!--END_PROBLEM_COUNT-->-brightgreen?style=for-the-badge&logo=leetcode)
 ![Status](https://img.shields.io/badge/Grinding-Every%20Single%20Day-ff2e2e?style=for-the-badge&logo=fire)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
@@ -31,7 +31,7 @@ This repository is not just code. It's a **battle log**. Every file here is a bo
 
 | ⚡ Metric | 🎯 Value |
 |:---:|:---:|
-| **Total Problems Solved** | `<!--PROBLEM_COUNT-->0<!--END_PROBLEM_COUNT-->` 🔴 *(auto-updates on every push)* |
+| **Total Problems Solved** | `<!--PROBLEM_COUNT-->100<!--END_PROBLEM_COUNT-->` 🔴 *(auto-updates on every push)* |
 | **Total Commits** | `217+` |
 | **Language** | `C++ (100%)` |
 | **Difficulty Range** | `Easy → Hard` |
