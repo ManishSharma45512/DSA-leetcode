@@ -112,7 +112,7 @@ I'm currently pursuing a **BS in Data Science & Applications (IIT Madras)** alon
 
 <div align="center">
 
-[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/)
+[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/ManishJangid01/)]
 [![GitHub](https://img.shields.io/badge/GitHub-ManishSharma45512-181717?style=for-the-badge&logo=github)](https://github.com/ManishSharma45512)
 
 </div>
