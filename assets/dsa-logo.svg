@@ -1,0 +1,20 @@
+<svg width="640" height="180" viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .letter {
+        font-family: 'Product Sans', 'Segoe UI', Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 120px;
+      }
+    </style>
+  </defs>
+  <rect width="640" height="180" fill="none"/>
+  <text x="30" y="130" class="letter" fill="#4285F4">D</text>
+  <text x="175" y="130" class="letter" fill="#EA4335">S</text>
+  <text x="300" y="130" class="letter" fill="#FBBC05">A</text>
+  <rect x="30"  y="150" width="90"  height="10" rx="5" fill="#4285F4"/>
+  <rect x="128" y="150" width="90"  height="10" rx="5" fill="#EA4335"/>
+  <rect x="226" y="150" width="90"  height="10" rx="5" fill="#FBBC05"/>
+  <rect x="324" y="150" width="90"  height="10" rx="5" fill="#34A853"/>
+  <text x="440" y="120" font-family="Fira Code, Consolas, monospace" font-weight="700" font-size="70" fill="#34A853">&lt;/&gt;</text>
+</svg>
