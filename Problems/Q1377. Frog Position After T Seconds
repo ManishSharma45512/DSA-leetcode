@@ -1,0 +1,56 @@
+class Solution {
+public:
+    bool help(unordered_map<int,vector<int>>& map, vector<int>& route, int& target, vector<int>& poss, int prev, int curr) {
+        route.push_back(curr);
+        
+        int branches = map[curr].size() - (prev == 0 ? 0 : 1);// Calculate branches: total neighbors minus 1 (to not go back to the parent)
+        poss.push_back(branches);
+
+        if (curr == target) {
+            return true; // We found the target!
+        }
+
+        vector<int> temp = map[curr]; //neighbours of curr node
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp[i] != prev) { // Don't jump backward to the parent
+                if (help(map, route, target, poss, curr, temp[i])) {
+                    return true;
+                }
+            }
+        }
+
+        // Backtrack if this path doesn't lead to the target
+        route.pop_back();
+        poss.pop_back();
+        return false;
+    }
+
+    double frogPosition(int n, vector<vector<int>>& edges, int t, int target) {
+        unordered_map<int,vector<int>> map;
+        for (int i = 0; i < edges.size(); i++) {
+            map[edges[i][0]].push_back(edges[i][1]);
+            map[edges[i][1]].push_back(edges[i][0]);
+        }
+
+        vector<int> route;
+        vector<int> poss;
+        
+        
+        help(map, route, target, poss, 0, 1);//we start from curr=1 and prev=0
+
+        int steps = route.size() - 1; // Number of jumps to reach target
+
+        if (t < steps) return 0.0;//we don't have enough time
+
+        // If we reach early, but there are child branches, the frog must jump away
+        int target_branches = map[target].size() - (target == 1 ? 0 : 1);
+        if (t > steps && target_branches > 0) return 0.0;
+
+        double ans = 1.0;
+        for (int i = 0; i < steps; i++) {
+            ans /= poss[i];
+        }
+
+        return ans;
+    }
+};
