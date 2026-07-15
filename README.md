@@ -131,14 +131,3 @@ I'm currently pursuing a **BS in Data Science & Applications (IIT Madras)** alon
 
 </div>
 
-<!---LeetCode Topics Start-->
-# LeetCode Topics
-## Math
-|  |
-| ------- |
-| [3658-gcd-of-odd-and-even-sums](https://github.com/ManishSharma45512/DSA-leetcode/tree/master/3658-gcd-of-odd-and-even-sums) |
-## Number Theory
-|  |
-| ------- |
-| [3658-gcd-of-odd-and-even-sums](https://github.com/ManishSharma45512/DSA-leetcode/tree/master/3658-gcd-of-odd-and-even-sums) |
-<!---LeetCode Topics End-->
