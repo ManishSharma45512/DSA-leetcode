@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> findMissingElements(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int> missing;
+
+        for (int i = 0; i < (int)nums.size() - 1; i++) {
+            // Fill any gap between nums[i] and nums[i + 1]
+            for (int curr = nums[i] + 1; curr < nums[i + 1]; curr++) {
+                missing.push_back(curr);
+            }
+        }
+
+        return missing;
+    }
+};
