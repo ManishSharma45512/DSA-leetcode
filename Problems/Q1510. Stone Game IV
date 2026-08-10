@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool winnerSquareGame(int n) {
+        vector<bool> dp(n + 1, false);
+
+        // Base case: dp[0] = false (0 stones means no moves left -> loss)
+
+        for (int i = 1; i <= n; i++) {
+            // Try subtracting all possible square numbers k*k <= i
+            for (int k = 1; k * k <= i; k++) {
+                // If subtracting k*k leaves the opponent with a losing state, we win!
+                if (!dp[i - k * k]) {
+                    dp[i] = true;
+                    break; // No need to check further moves for state i
+                }
+            }
+        }
+
+        return dp[n];
+    }
+};
