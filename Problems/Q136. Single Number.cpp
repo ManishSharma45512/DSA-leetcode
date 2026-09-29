@@ -1,16 +1,10 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        unordered_map<int, int> freq;
-
+        int single = 0;
         for (int num : nums) {
-            freq[num]++;
+            single ^= num;
         }
-
-        for (const auto& [num, count] : freq) {
-            if (count == 1) return num;
-        }
-
-        return 0;
+        return single;
     }
 };
